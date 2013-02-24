@@ -6,8 +6,8 @@ import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class HardCore extends JavaPlugin{
-    private static final Logger LOG = Logger.getLogger(HardCore.class.getName());
+public class plugin extends JavaPlugin{
+    private static final Logger LOG = Logger.getLogger(plugin.class.getName());
     protected ListStore banList;
     
     public static Logger getLOG() {
@@ -42,6 +42,7 @@ public class HardCore extends JavaPlugin{
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(this), this);
         pm.registerEvents(new PlayerLoginListener(this), this);
+        this.getCommand("Unban").setExecutor(new UnbanExecutor (this));
         
         
         
