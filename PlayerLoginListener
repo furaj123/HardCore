@@ -17,7 +17,7 @@ class PlayerLoginListener implements Listener {
         
         if(plugin.banList.contains(playerName)){
             e.setKickMessage("Zginoles masz bana!");
-            e.setResult(PlayerLoginEvent.Result.KICK_BANNED);
+            e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
         }
     }
 }
