@@ -1,0 +1,38 @@
+package me.furaj123.pl;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+
+class PlayerListener implements Listener {
+    private final plugin plugin;
+    private static final Logger LOG = Logger.getLogger(plugin.class.getName());
+    
+    public PlayerListener(plugin instance) {
+        plugin = instance;
+    }
+    
+    
+    
+    @EventHandler
+    public void PlayerDeathEvent (PlayerDeathEvent e){
+        Player p = e.getEntity();
+        
+        if(p.isOp()){
+            
+        }else if(p.hasPlayedBefore()){
+            String nick = p.getName();
+            plugin.banList.add(nick);
+            p.kickPlayer("Zginoles masz bana!");
+            LOG.log(Level.INFO, "Gracz zostal zbanowany po smierci!{0}", nick);
+        }else{
+            String nick = p.getName();
+            LOG.log(Level.INFO, "Gracz nie gral nigdy wczesniej wiec nie dostal bana za smierc!{0}", nick);
+            p.sendMessage(ChatColor.DARK_GREEN+"Grasz poraz pierwszy wiec nie dostales bana!"+ChatColor.DARK_RED+" Nastepnym razem dostaniesz.");
+        }
+    }
+}
