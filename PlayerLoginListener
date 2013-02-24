@@ -1,0 +1,23 @@
+package me.furaj123.pl;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerLoginEvent;
+
+class PlayerLoginListener implements Listener {
+    private final plugin plugin;
+
+    public PlayerLoginListener(plugin instance) {
+        plugin = instance;
+    }
+    
+    @EventHandler
+    public void PlayerLoginEvent(PlayerLoginEvent e){
+        String playerName = e.getPlayer().getName();
+        
+        if(plugin.banList.contains(playerName)){
+            e.setKickMessage("Zginoles masz bana!");
+            e.setResult(PlayerLoginEvent.Result.KICK_BANNED);
+        }
+    }
+}
